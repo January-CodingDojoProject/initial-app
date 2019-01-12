@@ -14,6 +14,7 @@
     <div class="container">
           <!-- Navigation Bar -->
           <nav class="navbar navbar-default navbar-static-top">
+              <h3>Merch</h3>
               <div>
                   <a href="/">Home</a>
                   <a href="/listen"> | Listen</a>
@@ -21,7 +22,7 @@
                   <a href="/tour"> | Tour</a>
               </div>
           </nav>
-        <h3>Merch</h3>
+        
         <div>
             <table class="table table-hover">
                 <thead>
@@ -69,6 +70,18 @@
                 </tbody>
               </table>
         </div>
+        <form action="your-server-side-code" method="POST">
+            <script
+              src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+              data-key="pk_test_TYooMQauvdEDq54NiTphI7jx"
+              data-amount="999"
+              data-name="BandSite"
+              data-description="Example charge"
+              data-image="http://purepng.com/public/uploads/large/purepng.com-black-electric-guitarelectric-guitarsteelstringselectricalblack-1421526494331fiufa.png"
+              data-locale="auto"
+              data-zip-code="true">
+            </script>
+          </form>
     </div>
     
 
