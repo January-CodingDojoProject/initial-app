@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
     url(r'^$', views.index, name="index"),#root route
     url(r'^merch$', views.merch), #view merch page route
+    url(r'^checkout$', views.checkout), #allows you to keep track of merch amounts
     url(r'^tour$', views.tour), #view tour dates page route
     url(r'^listen$', views.listen), # view the listening page route
 
@@ -12,5 +13,6 @@ urlpatterns = [
     # url(r'^addtourdate$', views.addtourdate),
     url(r'^admin$', views.admin), #loads the admin page
     url(r'^login$', views.login), #logs in the user
-    url(r'^dashboard$', views.dashboard) #loads the dashboard page
+    url(r'^dashboard$', views.dashboard), #loads the dashboard page
+    url(r'^created/$', views.created, name="created")
 ]
