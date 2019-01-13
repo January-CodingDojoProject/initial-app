@@ -80,11 +80,11 @@ class TourManager(models.Manager):
 	def create_tour(self, form_data):
 		manager = User.objects.get(id=form_data['manager'])
 		return self.create(
-		date=form_data['date'],
-		city=form_data['city'],
-		state=form_data['state'],
-		venue=form_data['venue'],
-		manager=manager,
+			date=form_data['date'],
+			city=form_data['city'],
+			state=form_data['state'],
+			venue=form_data['venue'],
+			manager=manager,
 		)
 class Tour(models.Model):
 	date = models.CharField(max_length=5)
@@ -99,7 +99,7 @@ class Tour(models.Model):
 	def __str__(self):
 		return self.venue
 
-# Create and validate Tour model.
+# Create and validate product model.
 class Product(models.Model):
 	name = models.CharField(max_length=120)
 	price = models.IntegerField()
