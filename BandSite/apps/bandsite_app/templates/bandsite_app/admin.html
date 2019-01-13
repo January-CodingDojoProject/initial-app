@@ -29,7 +29,11 @@
           {% endfor %}
         </ul>
       {% endif %}
-      <div class="form-container">
+
+
+
+      <!-- I don't think we need a register function, but leaving as commented for convience. -->
+      <!-- <div class="form-container">
         <h2>Register</h2>
         <form action="/created/" method="post">
           {% csrf_token %}
@@ -45,10 +49,11 @@
           <input type="password" name="password" placeholder="">
           <input type="submit" value="Register">
         </form>
-      </div>
+      </div> -->
       
       <div class="container">
         <h2>Login</h2>
+        <p>User email address test@test.com and password test@test.com </p>
         <form action="/login" method="post">
           {% csrf_token %}
           <div class="form-group">
