@@ -12,7 +12,14 @@ def merch(request):
   return render(request, 'bandsite_app/merch.html')
 
 def tour(request):
-  return render(request, 'bandsite_app/tour.html')
+  context = {
+    # 'tours': Tour.objects.filter(manager=request.session['user_id']),
+    # 'user_info': User.objects.get(id=request.session['user_id']),
+    'tours': Tour.objects.all(),
+
+  }
+  print(Tour.objects.all())
+  return render(request, 'bandsite_app/tour.html', context)
 
 def listen(request):
   return render(request, 'bandsite_app/listen.html')
@@ -30,12 +37,12 @@ def admin(request):
 def dashboard(request):
 
   if 'user_id' not in request.session:
-    return redirect('bandsite:dashboard')
+    return redirect('bandsite:admin')
 
   context = {
     "managers": User.objects.all()
   }
-  return render(request, 'bandsite_app/tour.html', context)
+  return render(request, 'bandsite_app/dashboard.html', context)
 
 def create(request):
   errors = User.objects.validate(request.POST)

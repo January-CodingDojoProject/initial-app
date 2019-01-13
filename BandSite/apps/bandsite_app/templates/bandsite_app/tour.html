@@ -8,21 +8,13 @@
         <thead>
         </thead>
         <tbody>
-          <tr>
-            <td>5/23/2019</td>
-            <td>Seattle, WA</td>
-            <td>The Crocodile Cafe</td>
-          </tr>
-          <tr>
-            <td>5/24/2019</td>
-            <td>Seattle, WA</td>
-            <td>The Crocodile Cafe</td>
-          </tr>
-          <tr>
-            <td>5/26/2019</td>
-            <td>Santa Cruz, CA</td>
-            <td>The Catalyst</td>
-          </tr>
+          {% for tour in tours %}
+            <tr>
+              <td>{{ tour.date }} :: </td>
+              <td>{{ tour.city }}, {{ tour.state }} :: </td>
+              <td>{{ tour.venue }}</td>
+            </tr>
+          {% endfor %}
         </tbody>
       </table>
     </div>

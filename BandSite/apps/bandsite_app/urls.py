@@ -18,6 +18,4 @@ urlpatterns = [
     url(r'^newTour/$', views.newTour, name ="newTour"), #adds a new tour 
     url(r'^logout$', views.logout, name ="logout"), #logs in the user
 
-
-
 ]
