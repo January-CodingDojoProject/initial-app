@@ -18,5 +18,6 @@ urlpatterns = [
     url(r'^newTour/$', views.newTour, name ="newTour"), #adds a new tour 
     url(r'^logout$', views.logout, name ="logout"), #logs out the user
     url(r'^edit/(?P<tour_id>\d+)$', views.edit), #loads the edit tour page
+    url(r'^delete/(?P<tour_id>\d+)$', views.delete)
 
 ]

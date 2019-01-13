@@ -86,6 +86,12 @@ class TourManager(models.Manager):
 			venue=form_data['venue'],
 			manager=manager,
 		)
+
+	def delete_tour(self, form_data):
+		tour = Tour.objects.get(id=form_data)
+		tour.delete()  
+
+
 class Tour(models.Model):
 	date = models.CharField(max_length=5)
 	city = models.CharField(max_length=120)
