@@ -7,6 +7,13 @@
       <table class="table table-hover">
         <thead>
         </thead>
+        {% for tour in tours %}
+        {% if tour.manager.id == request.session.id %}
+        <p>Welcome, {{tour.manager.first_name}} {{tour.manager.last_name}} | {{ tour.manager }} <a href="/dashboard">Add Tour</a></p>
+
+        {% endif %}
+        {% endfor %}
+
         <tbody>
           {% for tour in tours %}
             <tr>
@@ -14,7 +21,7 @@
               <td>{{ tour.city }}, {{ tour.state }} :: </td>
               <td>{{ tour.venue }}</td>
               {% if tour.manager.id == request.session.id %}
-              <td>Tour Manager: {{ tour.manager }}</td>
+              <td>Tour Manager: {{tour.manager.first_name}} {{tour.manager.last_name}} | {{ tour.manager }}</td>
               <td><a href="/edit/{{ tour.id }}">Edit</a></td>
               <td><a href="/delete/{{ tour.id }}">Delete</a></td>
               {% endif %}
@@ -22,7 +29,6 @@
           {% endfor %}
         </tbody>
       </table>
- 
     </div>
     <iframe width="100%" height="166" scrolling="no" frameborder="no" auto_play="True"
       src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/293&amp;auto_play=true&amp;">
