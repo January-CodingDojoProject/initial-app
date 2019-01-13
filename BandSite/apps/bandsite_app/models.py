@@ -80,11 +80,11 @@ class TourManager(models.Manager):
 	def create_tour(self, form_data):
 		manager = User.objects.get(id=form_data['manager'])
 		return self.create(
-		date=form_data['date'],
-		city=form_data['city'],
-		state=form_data['state'],
-		venue=form_data['venue'],
-		manager=manager,
+			date=form_data['date'],
+			city=form_data['city'],
+			state=form_data['state'],
+			venue=form_data['venue'],
+			manager=manager,
 		)
 class Tour(models.Model):
 	date = models.CharField(max_length=5)
