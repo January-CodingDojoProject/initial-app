@@ -1,65 +1,36 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% extends './layout.html' %}
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <title>Band Site</title>
-  </head>
-  <body>
-    <div class="container">
-          <!-- Navigation Bar -->
-          <nav class="navbar navbar-default navbar-static-top">
-              <div>
-                  <a href="/">Home</a>
-                  <a href="/listen"> | Listen</a>
-                  <a href="/merch"> | Merch</a>
-                  <a href="/tour"> | Tour</a>
-              </div>
-          </nav>
-        <h3>Admin Dashboard for Adding Tour Dates</h3>
-        {% if messages %}
-        <ul class="messages">
-          {% for message in messages %}
-            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+{% block title %} Tour Management {% endblock %}
+{% block body %}   
+    <h3>Admin Dashboard for Adding Tour Dates</h3>
+    <form action="/newTour/" method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="date">Date</label>
+        <input type="text" class="form-control" name="date" id="date" placeholder="">
+      </div> 
+      <div class="form-group">
+        <label for="city">City</label>
+        <input type="text" class="form-control" name="city" id="city" placeholder="">
+      </div> 
+      <div class="form-group">
+        <label for="state">State</label>
+        <input type="text" class="form-control" name="state" id="state" placeholder="">
+      </div> 
+      <div class="form-group">
+        <label for="venue">Venue</label>
+        <input type="text" class="form-control" name="venue" id="venue" placeholder="">
+      </div> 
+      <div class="form-group">
+        <label for="manager">Manager:</label>
+        <select name="manager" id="">
+          {% for manager in managers %}
+            <option value="{{ manager.id }}">{{ manager.first_name }} {{ manager.last_name }} - {{ manager.username }}</option>
           {% endfor %}
-        </ul>
-      {% endif %}
-      <div class="form-container">
-        <h2></h2>
-        <form action="/create/" method="post">
-          {% csrf_token %}
-          <div class="form-group">
-            <label for="date">Date</label>
-            <input type="text" class="form-control" name="date" id="date" placeholder="">
-          </div> 
-          <div class="form-group">
-            <label for="city">City</label>
-            <input type="text" class="form-control" name="city" id="city" placeholder="">
-          </div> 
-          <div class="form-group">
-            <label for="state">State</label>
-            <input type="text" class="form-control" name="state" id="state" placeholder="">
-          </div> 
-          <div class="form-group">
-            <label for="venue">Venue</label>
-            <input type="text" class="form-control" name="venue" id="venue" placeholder="">
-          </div> 
-          <button type="submit" class="btn btn-default" value="submit" id="submit">Add Tour</button>
-        </form>
-      </div>
-      
-    </div>
-    
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
-</html>
+        </select>
+      </div> 
+      <button type="submit" class="btn btn-default" value="submit" id="submit">Add Tour</button>
+      <br>
+      <br>
+    </form>
+{% endblock %}

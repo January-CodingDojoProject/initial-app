@@ -18,5 +18,5 @@ from django.contrib import admin
 
 urlpatterns = [
     # url(r'^admin/', admin.site.urls), #removed to use admin route in app
-    url(r'^', include('apps.bandsite_app.urls'))
+    url(r'^', include('apps.bandsite_app.urls', namespace ="bandsite"))
 ]
