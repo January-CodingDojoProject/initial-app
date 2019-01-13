@@ -43,10 +43,10 @@
                         <td>$15.00</td>
                         <td>  
                             <select name="record" class="form-control" id="sel1">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
+                                <option value="15">1</option>
+                                <option value="30">2</option>
+                                <option value="45">3</option>
+                                <option value="60">4</option>
                             </select>
                             </td>
                         <td><button type="button" class="btn btn-secondary">Add to Cart</button></td>
@@ -57,10 +57,10 @@
                         <td>$10.00</td>
                         <td>  
                             <select name="tshirt" class="form-control" id="sel1">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
+                                <option value="10">1</option>
+                                <option value="20">2</option>
+                                <option value="30">3</option>
+                                <option value="40">4</option>
                             </select>
                             </td>
                         <td><button type="button" class="btn btn-secondary">Add to Cart</button></td>
@@ -71,10 +71,10 @@
                         <td>$30.00</td>
                         <td>  
                             <select name="hoodie" class="form-control" id="sel1">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
+                            <option value="30">1</option>
+                            <option value="60">2</option>
+                            <option value="90">3</option>
+                            <option value="120">4</option>
                             </select>
                         </td>
                         <td><button type="button" class="btn btn-secondary">Add to Cart</button></td>
@@ -87,9 +87,9 @@
             <script
               src="https://checkout.stripe.com/checkout.js" class="stripe-button"
               data-key="pk_test_TYooMQauvdEDq54NiTphI7jx"
-              data-amount="999"
+              data-amount="{{ merch_count }}"
               data-name="BandSite"
-              data-description="Example charge"
+              data-description="{{ merch_count }}"
               data-image="http://purepng.com/public/uploads/large/purepng.com-black-electric-guitarelectric-guitarsteelstringselectricalblack-1421526494331fiufa.png"
               data-locale="auto"
               data-zip-code="true">
