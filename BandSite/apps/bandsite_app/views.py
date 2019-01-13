@@ -84,3 +84,17 @@ def newTour(request):
 
   Tour.objects.create_tour(request.POST)
   return redirect('bandsite:tour')
+
+def edit(request, tour_id):
+  if 'id' not in request.session:	
+	  return redirect('/')
+
+  #new code protecting route:  
+  tour = Tour.objects.get(id=tour_id)
+  # if request.session['id'] !=  tour.user_id: #if the current user does not match the tours user_id
+  #   request.session.clear() #clear session
+  #   return redirect('/') #redirect the user out of the application
+  context = {
+    "tour" : Tour.objects.get(id=tour_id)
+  }
+  return render(request, "bandsite_app/edittour.html", context)
