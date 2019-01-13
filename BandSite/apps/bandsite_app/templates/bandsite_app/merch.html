@@ -1,107 +1,63 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <title>Band Site</title>
-  </head>
-  <body>
-    <div class="container">
-          <!-- Navigation Bar -->
-          <nav class="navbar navbar-default navbar-static-top">
-              <h3>Merchandise</h3>
-              <div>
-                  <a href="/">Home</a>
-                  <a href="/listen"> | Listen</a>
-                  <a href="/merch"> | Merch</a>
-                  <a href="/tour"> | Tour</a>
-              </div>
-          </nav>
-        
-        <div class="container">
-        <form action='/checkout' method='POST'>
-                <h6 class="mb-4" id='buy'>Want to rep. our awesome band?</h6>
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th></th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>Record!</td>
-                        <td><img src="https://img.secure.cdn2.wmgecom.com/media/catalog/product/cache/864/image/9df78eab33525d08d6e5fb8d27136e95/t/b/tbk-turnblue_2.png" style="width:82px; height:86px"></td>
-                        <td>$15.00</td>
-                        <td>  
-                            <select name="record" class="form-control" id="sel1">
-                                <option value="15">1</option>
-                                <option value="30">2</option>
-                                <option value="45">3</option>
-                                <option value="60">4</option>
-                            </select>
-                            </td>
-                        <td><button type="button" class="btn btn-secondary">Add to Cart</button></td>
-                    </tr>
-                    <tr>
-                    <td>T-Shirt!</td>
-                        <td><img src="https://m.media-amazon.com/images/I/A1vAh9jhIlL._CLa%7C2140,2000%7C91Lr6PfFw5L.png%7C0,0,2140,2000+0.0,0.0,2140.0,2000.0.png" style="width:82px; height:86px"></td>
-                        <td>$10.00</td>
-                        <td>  
-                            <select name="tshirt" class="form-control" id="sel1">
-                                <option value="10">1</option>
-                                <option value="20">2</option>
-                                <option value="30">3</option>
-                                <option value="40">4</option>
-                            </select>
-                            </td>
-                        <td><button type="button" class="btn btn-secondary">Add to Cart</button></td>
-                    </tr>
-                    <tr>
-                        <td>Hoodie!</td>
-                        <td><img src="https://img.secure.cdn2.wmgecom.com/media/catalog/product/cache/864/image/600x/9df78eab33525d08d6e5fb8d27136e95/b/l/black-keys-text-hoodie.png" style="width:82px; height:86px"></td>
-                        <td>$30.00</td>
-                        <td>  
-                            <select name="hoodie" class="form-control" id="sel1">
-                            <option value="30">1</option>
-                            <option value="60">2</option>
-                            <option value="90">3</option>
-                            <option value="120">4</option>
-                            </select>
-                        </td>
-                        <td><button type="button" class="btn btn-secondary">Add to Cart</button></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </form>
-        </div>
-        <form action="your-server-side-code" method="POST">
-            <script
-              src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-              data-key="pk_test_TYooMQauvdEDq54NiTphI7jx"
-              data-amount="{{ merch_count }}"
-              data-name="BandSite"
-              data-description="{{ merch_count }}"
-              data-image="http://purepng.com/public/uploads/large/purepng.com-black-electric-guitarelectric-guitarsteelstringselectricalblack-1421526494331fiufa.png"
-              data-locale="auto"
-              data-zip-code="true">
-            </script>
-          </form>
+{% extends './layout.html' %}
+{% block title %} Merchandize {% endblock %}
+{% block body %}
+    <div>
+      <table class="table table-hover">
+        <thead>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Record!</td>
+            <td>15.00</td>
+            <td>  
+              <select class="form-control" id="sel1">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+              </select>
+            </td>
+            <td><button type="button" class="btn btn-secondary">Add to Cart</button></td>
+          </tr>
+          <tr>
+            <td>T-Shirt!</td>
+            <td>10.00</td>
+            <td>  
+              <select class="form-control" id="sel1">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+              </select>
+            </td>
+            <td><button type="button" class="btn btn-secondary">Add to Cart</button></td>
+          </tr>
+          <tr>
+            <td>Hoodie!</td>
+            <td>30.00</td>
+            <td>  
+              <select class="form-control" id="sel1">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+              </select>
+            </td>
+            <td><button type="button" class="btn btn-secondary">Add to Cart</button></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
-</html>
+    <form action="your-server-side-code" method="POST">
+      <script
+        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="pk_test_TYooMQauvdEDq54NiTphI7jx"
+        data-amount="999"
+        data-name="BandSite"
+        data-description="Example charge"
+        data-image="http://purepng.com/public/uploads/large/purepng.com-black-electric-guitarelectric-guitarsteelstringselectricalblack-1421526494331fiufa.png"
+        data-locale="auto"
+        data-zip-code="true">
+      </script>
+    </form>
+{% endblock %}
