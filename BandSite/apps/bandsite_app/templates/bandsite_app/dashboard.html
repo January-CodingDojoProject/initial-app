@@ -21,7 +21,7 @@
                   <a href="/tour"> | Tour</a>
               </div>
           </nav>
-        <h3>Add Tour Date Page</h3>
+        <h3>Admin Dashboard for Adding Tour Dates</h3>
         {% if messages %}
         <ul class="messages">
           {% for message in messages %}
@@ -33,9 +33,22 @@
         <h2></h2>
         <form action="" method="post">
           {% csrf_token %}
-          <label for="tour_date">Tour Date:</label>
-          <input type="text" name="tour_date" placeholder="">
-
+          <div class="form-group">
+            <label for="date">Date</label>
+            <input type="text" class="form-control" name="date" id="date" placeholder="">
+          </div> 
+          <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" class="form-control" name="city" id="city" placeholder="">
+          </div> 
+          <div class="form-group">
+            <label for="state">State</label>
+            <input type="text" class="form-control" name="state" id="state" placeholder="">
+          </div> 
+          <div class="form-group">
+            <label for="venue">Venue</label>
+            <input type="text" class="form-control" name="venue" id="venue" placeholder="">
+          </div> 
         </form>
       </div>
       
