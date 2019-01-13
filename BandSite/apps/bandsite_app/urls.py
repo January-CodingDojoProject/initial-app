@@ -14,5 +14,5 @@ urlpatterns = [
     url(r'^admin$', views.admin), #loads the admin page
     url(r'^login$', views.login), #logs in the user
     url(r'^dashboard$', views.dashboard), #loads the dashboard page
-    url(r'^created/$', views.created, name="created")
+    url(r'^create/$', views.create) #creates a tour date
 ]
