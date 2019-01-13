@@ -86,15 +86,23 @@ def newTour(request):
   return redirect('bandsite:tour')
 
 def edit(request, tour_id):
-  if 'id' not in request.session:	
-	  return redirect('/')
-
-  #new code protecting route:  
+  #code protecting route, does not work, will need to update
+  # if 'user_id' not in request.session:
+  #   request.session.clear() #clear session	
+  # return redirect('/')#redirect the user out of the application
   tour = Tour.objects.get(id=tour_id)
-  # if request.session['id'] !=  tour.user_id: #if the current user does not match the tours user_id
-  #   request.session.clear() #clear session
-  #   return redirect('/') #redirect the user out of the application
   context = {
-    "tour" : Tour.objects.get(id=tour_id)
+    "tour" : Tour.objects.get(id=tour_id),
+    "managers": User.objects.all()
   }
   return render(request, "bandsite_app/edittour.html", context)
+
+def delete(request, tour_id):
+  # if 'id' not in request.session:	
+	#   return redirect('/')
+
+  #new code, protecting the route. If the logged in user matches the jobs user id, then the job can be deleted.
+  tour = Tour.objects.get(id=tour_id)
+  # if request.session['id'] ==  tour.user_id:
+  Tour.objects.delete_tour(tour_id)
+  return redirect('bandsite:tour')

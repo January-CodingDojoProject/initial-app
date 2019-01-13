@@ -14,8 +14,9 @@
               <td>{{ tour.city }}, {{ tour.state }} :: </td>
               <td>{{ tour.venue }}</td>
               {% if tour.manager.id == request.session.id %}
+              <td>Tour Manager: {{ tour.manager }}</td>
               <td><a href="/edit/{{ tour.id }}">Edit</a></td>
-              <td><a href="">Delete</a></td>
+              <td><a href="/delete/{{ tour.id }}">Delete</a></td>
               {% endif %}
             </tr>
           {% endfor %}

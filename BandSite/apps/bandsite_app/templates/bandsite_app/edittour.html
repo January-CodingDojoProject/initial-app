@@ -1,32 +1,36 @@
 {% extends './layout.html' %}
 
-{% block title %} Tours {% endblock %}
-
-{% block body %}
-    <div>
-      <table class="table table-hover">
-
-        <h1>THIS IS THE EDIT TOUR PAGE</h1>
-
-        <thead>
-        </thead>
-        <tbody>
-          {% for tour in tours %}
-            <tr>
-              <td>{{ tour.date }} :: </td>
-              <td>{{ tour.city }}, {{ tour.state }} :: </td>
-              <td>{{ tour.venue }}</td>
-              {% if tour.manager.id == request.session.id %}
-              <td><a href="/edit/{{ tour.id }}">Edit</a></td>
-              <td><a href="">Delete</a></td>
-              {% endif %}
-            </tr>
+{% block title %} Tour Management {% endblock %}
+{% block body %}   
+    <h3>Edit Tour</h3>
+    <form action="/newTour/" method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="date">Date</label>
+        <input type="text" class="form-control" name="date" id="date" placeholder="" value="{{ tour.date }}">
+      </div> 
+      <div class="form-group">
+        <label for="city">City</label>
+        <input type="text" class="form-control" name="city" id="city" placeholder="" value="{{ tour.city }}">
+      </div> 
+      <div class="form-group">
+        <label for="state">State</label>
+        <input type="text" class="form-control" name="state" id="state" placeholder="" value="{{ tour.state }}">
+      </div> 
+      <div class="form-group">
+        <label for="venue">Venue</label>
+        <input type="text" class="form-control" name="venue" id="venue" placeholder="" value="{{ tour.venue }}">
+      </div> 
+      <div class="form-group">
+        <label for="manager">Manager:</label>
+        <select name="manager" id="">
+          {% for manager in managers %}
+            <option value="{{ manager.id }}">{{ manager.first_name }} {{ manager.last_name }} - {{ manager.username }}</option>
           {% endfor %}
-        </tbody>
-      </table>
- 
-    </div>
-    <iframe width="100%" height="166" scrolling="no" frameborder="no" auto_play="True"
-      src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/293&amp;auto_play=true&amp;">
-    </iframe>
+        </select>
+      </div> 
+      <button type="submit" class="btn btn-default" value="submit" id="submit">Update Tour</button>
+      <br>
+      <br>
+    </form>
 {% endblock %}
