@@ -16,7 +16,7 @@ def tour(request):
     # 'tours': Tour.objects.filter(manager=request.session['user_id']),
     # 'user_info': User.objects.get(id=request.session['user_id']),
     'tours': Tour.objects.all(),
-
+    'managers': User.objects.all()
   }
   print(Tour.objects.all())
   return render(request, 'bandsite_app/tour.html', context)
@@ -38,7 +38,7 @@ def dashboard(request):
 
   if 'user_id' not in request.session:
     return redirect('bandsite:admin')
-
+  
   context = {
     "managers": User.objects.all()
   }
