@@ -29,7 +29,6 @@ def listen(request):
 #   return render(request, 'bandsite_app/register.html', {'form': form})
 
 def checkout(request):
-<<<<<<< HEAD
   print(request.form)
   merch_count = int(request.POST['record']) + int(request.POST['tshirt']) + int(request.POST['hoodie'])
   print(merch_count)
@@ -47,9 +46,6 @@ def checkout(request):
       metadata={'order_id': 6735},
   )
   return render(request, 'bandsite_app/merch.html', merch_count=merch_count)
-=======
-  pass
->>>>>>> f92f74754421cbdd66cddfa95b7a2ed35641194d
 
 def admin(request):
   return render(request, 'bandsite_app/admin.html')
