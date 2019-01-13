@@ -17,9 +17,8 @@ def listen(request):
 
 def register(request):
   form = UserCreationForm()
-  return render(request, 'bandsite_app/register.html', {'form': form}
+  return render(request, 'bandsite_app/register.html', {'form': form})
 
-#admin access only:
 def checkout(request):
   pass
 
