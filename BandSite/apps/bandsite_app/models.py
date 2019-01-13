@@ -99,7 +99,7 @@ class Tour(models.Model):
 	def __str__(self):
 		return self.venue
 
-# Create and validate Tour model.
+# Create and validate product model.
 class Product(models.Model):
 	name = models.CharField(max_length=120)
 	price = models.IntegerField()

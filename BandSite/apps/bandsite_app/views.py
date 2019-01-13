@@ -17,9 +17,9 @@ def tour(request):
 def listen(request):
   return render(request, 'bandsite_app/listen.html')
 
-def register(request):
-  form = UserCreationForm()
-  return render(request, 'bandsite_app/register.html', {'form': form})
+# def register(request):
+#   form = UserCreationForm()
+#   return render(request, 'bandsite_app/register.html', {'form': form})
 
 def checkout(request):
   pass
@@ -27,22 +27,53 @@ def checkout(request):
 def admin(request):
   return render(request, 'bandsite_app/admin.html')
 
-def login(request):
-  users = User.objects.filter(email=request.POST["email"])#retrieve record in database to see if email exists
-  if len(users) > 0: #if I found a user
-    user = users[0]
-    if bcrypt.checkpw(request.POST['password'].encode(), user.pw_hash.encode()):   #checking to make sure the password is correct
-      request.session['id'] = user.id 
-      return redirect('/dashboard')
-  messages.error(request, 'invalid credentials')#if either of the above if's fail
-  return redirect('/admin')
-
 def dashboard(request):
-  return render(request, 'bandsite_app/dashboard.html')
+
+  if 'user_id' not in request.session:
+    return redirect('bandsite:dashboard')
+
+  context = {
+    "managers": User.objects.all()
+  }
+  return render(request, 'bandsite_app/tour.html', context)
 
 def create(request):
-  print(request.POST)
-  return redirect('/admin')
+  errors = User.objects.validate(request.POST)
+  if errors:
+    for error in errors:
+      messages.error(request, error)
+    return redirect('bandsite:admin')
+  # create and login user
+  user = User.objects.create_user(request.POST)
+  request.session['user_id'] = user.id
+  return redirect('bandsite:dashboard')
 
-  
+def login(request):
+  valid, result = User.objects.check_login(request.POST)
+  if not valid:
+    for error in result:
+      messages.error(request, error)
+    return redirect('bandsite:admin')
 
+  request.session['user_id'] = result.id
+  return redirect('bandsite:dashboard')
+
+def logout(request):
+  request.session.clear()
+  return redirect('bandsite:index') 
+
+def newTour(request):
+  if 'user_id' not in request.session:
+    return redirect('bandsite:admin')
+
+  if request.method != 'POST':
+    return redirect('bandsite:dashboard')
+
+  errors = Tour.objects.validate(request.POST)
+  if errors:
+    for error in errors:
+      messages.error(request, error)
+    return redirect('bandsite:dashboard')
+
+  Tour.objects.create_tour(request.POST)
+  return redirect('bandsite:tour')
