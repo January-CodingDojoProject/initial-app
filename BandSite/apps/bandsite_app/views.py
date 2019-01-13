@@ -40,6 +40,9 @@ def login(request):
 def dashboard(request):
   return render(request, 'bandsite_app/dashboard.html')
 
-def created(request):
-  pass
+def create(request):
+  print(request.POST)
+  return redirect('/admin')
+
+  
 
