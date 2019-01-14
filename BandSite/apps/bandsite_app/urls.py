@@ -15,8 +15,10 @@ urlpatterns = [
     url(r'^admin$', views.admin, name ="admin"), #loads the admin page
     url(r'^login$', views.login, name ="login"), #logs in the user
     url(r'^create/$', views.create, name ="create"), #creates a new user 
-    url(r'^dashboard/$', views.dashboard, name ="dashboard"), #creates a new user 
+    url(r'^dashboard/$', views.dashboard, name ="dashboard"), #loads dashboard user page
     url(r'^newTour/$', views.newTour, name ="newTour"), #adds a new tour 
-    url(r'^logout$', views.logout, name ="logout"), #logs in the user
+    url(r'^logout$', views.logout, name ="logout"), #logs out the user
+    url(r'^edit/(?P<tour_id>\d+)$', views.edit), #loads the edit tour page
+    url(r'^delete/(?P<tour_id>\d+)$', views.delete)
 
 ]

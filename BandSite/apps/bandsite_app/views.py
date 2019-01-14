@@ -72,7 +72,7 @@ def create(request):
     for error in errors:
       messages.error(request, error)
     return redirect('bandsite:admin')
-  # create and login user
+  # create and login user 
   user = User.objects.create_user(request.POST)
   request.session['user_id'] = user.id
   return redirect('bandsite:dashboard')
@@ -105,4 +105,31 @@ def newTour(request):
     return redirect('bandsite:dashboard')
 
   Tour.objects.create_tour(request.POST)
+  return redirect('bandsite:tour')
+
+def edit(request, tour_id):
+  #code protecting route from unlogged users editing tour. 
+  if 'user_id' not in request.session:
+    return redirect('bandsite:admin')
+  #code protecting route from non-tourmanagers editing tour. 
+  if 'user_id' != request.session["user_id"]:
+    request.session.clear()
+    return redirect('bandsite:admin')
+  tour = Tour.objects.get(id=tour_id)
+  context = {
+    "tour" : Tour.objects.get(id=tour_id),
+    "managers": User.objects.all()
+  }
+  return render(request, "bandsite_app/edittour.html", context)
+
+def delete(request, tour_id):
+  #code protecting route from unlogged users editing tour. 
+  if 'user_id' not in request.session:
+    return redirect('bandsite:admin')
+  #code protecting route from non-tourmanagers editing tour. 
+  if 'user_id' != request.session["user_id"]:
+    request.session.clear()
+    return redirect('bandsite:admin')
+  tour = Tour.objects.get(id=tour_id)
+  Tour.objects.delete_tour(tour_id)
   return redirect('bandsite:tour')
