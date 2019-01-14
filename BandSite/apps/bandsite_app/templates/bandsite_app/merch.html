@@ -1,83 +1,120 @@
-{% extends './layout.html' %}
-{% block title %} Merchandize {% endblock %}
-{% block body %}
-<div class="container">
-  <form action='/checkout' method='POST'>
-    {% csrf_exempt%}
-          <h6 class="mb-4" id='buy'>Want to rep. our awesome band?</h6>
-          <table class="table table-hover">
-              <thead>
-              <tr>
-                  <th>Item</th>
-                  <th></th>
-                  <th>Price</th>
-                  <th>Quantity</th>
-                  <th></th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                  <td>Record!</td>
-                  <td><img src="https://img.secure.cdn2.wmgecom.com/media/catalog/product/cache/864/image/9df78eab33525d08d6e5fb8d27136e95/t/b/tbk-turnblue_2.png" style="width:82px; height:86px"></td>
-                  <td>$15.00</td>
-                  <td>  
-                      <select name="record" class="form-control" id="sel1">
-                          <option value="15">1</option>
-                          <option value="30">2</option>
-                          <option value="45">3</option>
-                          <option value="60">4</option>
-                      </select>
-                      </td>
-                  <td><button type="button" class="btn btn-secondary">Add to Cart</button></td>
-              </tr>
-              <tr>
-              <td>T-Shirt!</td>
-                  <td><img src="https://m.media-amazon.com/images/I/A1vAh9jhIlL._CLa%7C2140,2000%7C91Lr6PfFw5L.png%7C0,0,2140,2000+0.0,0.0,2140.0,2000.0.png" style="width:82px; height:86px"></td>
-                  <td>$10.00</td>
-                  <td>  
-                      <select name="tshirt" class="form-control" id="sel1">
-                          <option value="10">1</option>
-                          <option value="20">2</option>
-                          <option value="30">3</option>
-                          <option value="40">4</option>
-                      </select>
-                      </td>
-                  <td><button type="button" class="btn btn-secondary">Add to Cart</button></td>
-              </tr>
-              <tr>
-                  <td>Hoodie!</td>
-                  <td><img src="https://img.secure.cdn2.wmgecom.com/media/catalog/product/cache/864/image/600x/9df78eab33525d08d6e5fb8d27136e95/b/l/black-keys-text-hoodie.png" style="width:82px; height:86px"></td>
-                  <td>$30.00</td>
-                  <td>  
-                      <select name="hoodie" class="form-control" id="sel1">
-                      <option value="30">1</option>
-                      <option value="60">2</option>
-                      <option value="90">3</option>
-                      <option value="120">4</option>
-                      </select>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+ 
+   <!-- Bootstrap CSS -->
+    {% comment %} <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css"> {% endcomment %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	{% block head %}{% endblock %}
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+  <div class="container">
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-default navbar-static-top">
+            <h3>Band Site</h3>
+            <div>
+                <a href="/">Home</a>
+                <a href="/merch"> | Merch</a>  
+                <a href="/tour"> | Tour</a>                                  
+                <a href="/listen"> | Listen</a>
+                <a href="{% url 'bandsite:admin' %}"> | admin</a>
+                <a href="{% url 'bandsite:logout' %}"> | Logout</a>
+            </div>
+        </nav>
+        {% if messages %}
+            <ul class="messages">
+            {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    <form action='/checkout' method='POST'>
+      {% csrf_token %}
+      <h6 class="mb-4" id='buy'>Want to rep. our awesome band?</h6>
+      <table class="table table-hover">
+          <thead>
+          <tr>
+              <th>Item</th>
+              <th></th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+              <td>Record!</td>
+              <td><img src="https://img.secure.cdn2.wmgecom.com/media/catalog/product/cache/864/image/9df78eab33525d08d6e5fb8d27136e95/t/b/tbk-turnblue_2.png" style="width:82px; height:86px"></td>
+              <td>$15.00</td>
+              <td>  
+                  <select class="form-control" name="merch" id="record">
+                      <option value="1500">1</option>
+                      <option value="3000">2</option>
+                      <option value="4500">3</option>
+                      <option value="6000">4</option>
+                  </select>
                   </td>
-                  <td><button type="button" class="btn btn-secondary">Add to Cart</button></td>
-              </tr>
-              </tbody>
-          </table>
-      </form>
-  </div>
+              <td><a href="/shopping_cart" class="btn btn-info">Add To Cart</a></td>
+          </tr>
+          <tr>
+          <td>T-Shirt!</td>
+              <td><img src="https://m.media-amazon.com/images/I/A1vAh9jhIlL._CLa%7C2140,2000%7C91Lr6PfFw5L.png%7C0,0,2140,2000+0.0,0.0,2140.0,2000.0.png" style="width:82px; height:86px"></td>
+              <td>$10.00</td>
+              <td>  
+                  <select class="form-control" name="merch" id="tshirt">
+                      <option value="1000">1</option>
+                      <option value="2000">2</option>
+                      <option value="3000">3</option>
+                      <option value="4000">4</option>
+                  </select>
+                  </td>
+              <td><a href="/shopping_cart" class="btn btn-info">Add To Cart</a></td>
+          </tr>
+          <tr>
+              <td>Hoodie!</td>
+              <td><img src="https://img.secure.cdn2.wmgecom.com/media/catalog/product/cache/864/image/600x/9df78eab33525d08d6e5fb8d27136e95/b/l/black-keys-text-hoodie.png" style="width:82px; height:86px"></td>
+              <td>$30.00</td>
+              <td>  
+                  <select class="form-control" name="merch" id="hoodie">
+                    <option value="3000">1</option>
+                    <option value="6000">2</option>
+                    <option value="9000">3</option>
+                    <option value="12000">4</option>
+                  </select>
+              </td>
+              <td><a href="/shopping_cart" class="btn btn-info">Add To Cart</a></td>
+          </tr>
+          </tbody>
+      </table>
+  </form>
   <form action="/checkout" method="POST">
-      <script
-        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-        data-key="pk_test_snvHKmjiPqDIZQtt1r66nJNt"
-        data-amount="{{ merch_count }}"
-        data-name="BandSite"
-        data-description="{{ merch_count }}"
-        data-image="http://purepng.com/public/uploads/large/purepng.com-black-electric-guitarelectric-guitarsteelstringselectricalblack-1421526494331fiufa.png"
-        data-locale="auto"
-        data-zip-code="true">
-      </script>
-      <br>
-      <br>
-    </form>
-</div>
-<iframe width="100%" height="166" scrolling="no" frameborder="no" auto_play="True"
-  src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/293&amp;auto_play=true&amp;">
-</iframe>
-{% endblock %}
+    <script
+      src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+      data-key="pk_test_snvHKmjiPqDIZQtt1r66nJNt"
+      data-amount="{{ request.session.cart }}"
+      data-name="BandSite"
+      data-description="{{ request.session.cart }}"
+      data-image="http://purepng.com/public/uploads/large/purepng.com-black-electric-guitarelectric-guitarsteelstringselectricalblack-1421526494331fiufa.png"
+      data-locale="auto"
+      data-zip-code="true">
+    </script>
+    <br>
+    <br>
+  </form>
+  <iframe width="100%" height="166" scrolling="no" frameborder="no" auto_play="True"
+    src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/293&amp;auto_play=true&amp;">
+  </iframe>
+  </div>
+  
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
