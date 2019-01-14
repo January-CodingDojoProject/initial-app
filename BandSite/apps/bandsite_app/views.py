@@ -50,7 +50,7 @@ def create(request):
     for error in errors:
       messages.error(request, error)
     return redirect('bandsite:admin')
-  # create and login user #ERROR USER IS NOT GETTING LOGGED IN? 
+  # create and login user 
   user = User.objects.create_user(request.POST)
   request.session['user_id'] = user.id
   return redirect('bandsite:dashboard')
@@ -86,10 +86,13 @@ def newTour(request):
   return redirect('bandsite:tour')
 
 def edit(request, tour_id):
-  #code protecting route, does not work, will need to update
-  # if 'user_id' not in request.session:
-  #   request.session.clear() #clear session	
-  # return redirect('/')#redirect the user out of the application
+  #code protecting route from unlogged users editing tour. 
+  if 'user_id' not in request.session:
+    return redirect('bandsite:admin')
+  #code protecting route from non-tourmanagers editing tour. 
+  if 'user_id' != request.session["user_id"]:
+    request.session.clear()
+    return redirect('bandsite:admin')
   tour = Tour.objects.get(id=tour_id)
   context = {
     "tour" : Tour.objects.get(id=tour_id),
@@ -98,11 +101,13 @@ def edit(request, tour_id):
   return render(request, "bandsite_app/edittour.html", context)
 
 def delete(request, tour_id):
-  # if 'id' not in request.session:	
-	#   return redirect('/')
-
-  #new code, protecting the route. If the logged in user matches the jobs user id, then the job can be deleted.
+  #code protecting route from unlogged users editing tour. 
+  if 'user_id' not in request.session:
+    return redirect('bandsite:admin')
+  #code protecting route from non-tourmanagers editing tour. 
+  if 'user_id' != request.session["user_id"]:
+    request.session.clear()
+    return redirect('bandsite:admin')
   tour = Tour.objects.get(id=tour_id)
-  # if request.session['id'] ==  tour.user_id:
   Tour.objects.delete_tour(tour_id)
   return redirect('bandsite:tour')
