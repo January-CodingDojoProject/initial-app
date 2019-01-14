@@ -9,6 +9,7 @@ def index(request):
   return render(request, 'bandsite_app/index.html')
 
 def merch(request):
+  request.session['cart'] = 0
   return render(request, 'bandsite_app/merch.html')
 
 def tour(request):
@@ -28,16 +29,23 @@ def listen(request):
 #   form = UserCreationForm()
 #   return render(request, 'bandsite_app/register.html', {'form': form})
 def shopping_cart(request):
-  print(request.POST.get('merch'))
   request.session['cart'] = 0
+  if request.method == 'POST':
+    merch_amount = request.POST['merch']
+    print(merch_amount)
+    request.session['cart'] = request.session['cart'] + int(merch_amount)
+    print(request.POST)
+    return render(request, 'bandsite_app/merch.html')
+  
   #for key, value in request.session.item():
     #print('{} => {}'.format('key, value'))
   #item = request.POST['merch']
   #request.session['cart'] = int(request.session['cart']) + int(item)
+def empty_cart(request):
+  del request.session['cart']
   return render(request, 'bandsite_app/merch.html')
 
 def checkout(request):
-  print(request.POST)
   # Set your secret key: remember to change this to your live secret key in production
   # See your keys here: https://dashboard.stripe.com/account/apikeys
   stripe.api_key = "sk_test_4eC39HqLyjWDarjtT1zdp7dc"

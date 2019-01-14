@@ -6,6 +6,7 @@ urlpatterns = [
     url(r'^$', views.index, name="index"),#root route
     url(r'^merch$', views.merch, name ="merch"), #view merch page route
     url(r'^shopping_cart$', views.shopping_cart, name="cart"),
+    url(r'^empty_cart$', views.empty_cart, name="emptyCart"),
     url(r'^checkout$', views.checkout, name ="checkout"), #allows you to keep track of merch amounts
     url(r'^tour$', views.tour, name ="tour"), #view tour dates page route
     url(r'^listen$', views.listen, name ="listen"), # view the listening page route
