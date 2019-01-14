@@ -34,7 +34,7 @@
             {% endfor %}
             </ul>
         {% endif %}
-    <form action='/checkout' method='POST'>
+    <form action='/shopping_cart' method='POST'>
       {% csrf_token %}
       <h6 class="mb-4" id='buy'>Want to rep. our awesome band?</h6>
       <table class="table table-hover">
@@ -54,13 +54,13 @@
               <td>$15.00</td>
               <td>  
                   <select class="form-control" name="merch" id="record">
-                      <option value="1500">1</option>
-                      <option value="3000">2</option>
-                      <option value="4500">3</option>
-                      <option value="6000">4</option>
+                      <option value="15">1</option>
+                      <option value="30">2</option>
+                      <option value="45">3</option>
+                      <option value="60">4</option>
                   </select>
                   </td>
-              <td><a href="/shopping_cart" class="btn btn-info">Add To Cart</a></td>
+              <td><input type="submit" value="Select"></td>
           </tr>
           <tr>
           <td>T-Shirt!</td>
@@ -68,13 +68,13 @@
               <td>$10.00</td>
               <td>  
                   <select class="form-control" name="merch" id="tshirt">
-                      <option value="1000">1</option>
-                      <option value="2000">2</option>
-                      <option value="3000">3</option>
-                      <option value="4000">4</option>
+                      <option value="10">1</option>
+                      <option value="20">2</option>
+                      <option value="30">3</option>
+                      <option value="40">4</option>
                   </select>
                   </td>
-              <td><a href="/shopping_cart" class="btn btn-info">Add To Cart</a></td>
+              <td><input type="submit" value="Select"></td>
           </tr>
           <tr>
               <td>Hoodie!</td>
@@ -82,13 +82,13 @@
               <td>$30.00</td>
               <td>  
                   <select class="form-control" name="merch" id="hoodie">
-                    <option value="3000">1</option>
-                    <option value="6000">2</option>
-                    <option value="9000">3</option>
-                    <option value="12000">4</option>
+                    <option value="30">1</option>
+                    <option value="60">2</option>
+                    <option value="90">3</option>
+                    <option value="120">4</option>
                   </select>
               </td>
-              <td><a href="/shopping_cart" class="btn btn-info">Add To Cart</a></td>
+              <td><input type="submit" value="Select"></td>
           </tr>
           </tbody>
       </table>
@@ -97,13 +97,16 @@
     <script
       src="https://checkout.stripe.com/checkout.js" class="stripe-button"
       data-key="pk_test_snvHKmjiPqDIZQtt1r66nJNt"
-      data-amount="{{ request.session.cart }}"
+      data-amount="{{ request.session.cart }}00"
       data-name="BandSite"
-      data-description="{{ request.session.cart }}"
+      data-description="${{ request.session.cart }}"
       data-image="http://purepng.com/public/uploads/large/purepng.com-black-electric-guitarelectric-guitarsteelstringselectricalblack-1421526494331fiufa.png"
       data-locale="auto"
       data-zip-code="true">
     </script>
+    <br>
+    <br>
+    <a class="btn btn-primary" href="/empty_cart" role="button">Empty Cart</a>
     <br>
     <br>
   </form>
