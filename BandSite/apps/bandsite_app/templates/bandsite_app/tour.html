@@ -8,7 +8,8 @@
         <thead>
         </thead>
         {% for tour in tours %}
-        {% if tour.manager.id == request.session.id %}
+
+        {% if tour.manager.id == request.session.user_id %}
         <p>Welcome, {{tour.manager.first_name}} {{tour.manager.last_name}} | {{ tour.manager }} <a href="/dashboard">Add Tour</a></p>
 
         {% endif %}
@@ -20,7 +21,7 @@
               <td>{{ tour.date }} :: </td>
               <td>{{ tour.city }}, {{ tour.state }} :: </td>
               <td>{{ tour.venue }}</td>
-              {% if tour.manager.id == request.session.id %}
+              {% if tour.manager.id == request.session.user_id %}
               <td>Tour Manager: {{tour.manager.first_name}} {{tour.manager.last_name}} | {{ tour.manager }}</td>
               <td><a href="/edit/{{ tour.id }}">Edit</a></td>
               <td><a href="/delete/{{ tour.id }}">Delete</a></td>

@@ -50,7 +50,7 @@ def create(request):
     for error in errors:
       messages.error(request, error)
     return redirect('bandsite:admin')
-  # create and login user
+  # create and login user #ERROR USER IS NOT GETTING LOGGED IN
   user = User.objects.create_user(request.POST)
   request.session['user_id'] = user.id
   return redirect('bandsite:dashboard')
