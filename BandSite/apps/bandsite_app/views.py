@@ -17,7 +17,7 @@ def tour(request):
     # 'tours': Tour.objects.filter(manager=request.session['user_id']),
     # 'user_info': User.objects.get(id=request.session['user_id']),
     'tours': Tour.objects.all(),
-    'managers': User.objects.all()
+    'managers': User.objects.all(),
   }
   print(Tour.objects.all())
   return render(request, 'bandsite_app/tour.html', context)
@@ -119,10 +119,7 @@ def edit(request, tour_id):
   #code protecting route from unlogged users editing tour. 
   if 'user_id' not in request.session:
     return redirect('bandsite:admin')
-  #code protecting route from non-tourmanagers editing tour. 
-  if 'user_id' != request.session["user_id"]:
-    request.session.clear()
-    return redirect('bandsite:admin')
+
   tour = Tour.objects.get(id=tour_id)
   context = {
     "tour" : Tour.objects.get(id=tour_id),
@@ -134,10 +131,7 @@ def delete(request, tour_id):
   #code protecting route from unlogged users editing tour. 
   if 'user_id' not in request.session:
     return redirect('bandsite:admin')
-  #code protecting route from non-tourmanagers editing tour. 
-  if 'user_id' != request.session["user_id"]:
-    request.session.clear()
-    return redirect('bandsite:admin')
+
   tour = Tour.objects.get(id=tour_id)
   Tour.objects.delete_tour(tour_id)
   return redirect('bandsite:tour')
