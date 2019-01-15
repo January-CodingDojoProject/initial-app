@@ -9,6 +9,7 @@ def index(request):
   return render(request, 'bandsite_app/index.html')
 
 def merch(request):
+  request.session['cart'] = 0
   return render(request, 'bandsite_app/merch.html')
 
 def tour(request):
@@ -27,9 +28,38 @@ def listen(request):
 # def register(request):
 #   form = UserCreationForm()
 #   return render(request, 'bandsite_app/register.html', {'form': form})
+def shopping_cart(request):
+  request.session['cart'] = 0
+  if request.method == 'POST':
+    merch_amount = request.POST['merch']
+    print(merch_amount)
+    request.session['cart'] = request.session['cart'] + int(merch_amount)
+    print(request.POST)
+    return render(request, 'bandsite_app/merch.html')
+  
+  #for key, value in request.session.item():
+    #print('{} => {}'.format('key, value'))
+  #item = request.POST['merch']
+  #request.session['cart'] = int(request.session['cart']) + int(item)
+def empty_cart(request):
+  del request.session['cart']
+  return render(request, 'bandsite_app/merch.html')
 
 def checkout(request):
-  pass
+  # Set your secret key: remember to change this to your live secret key in production
+  # See your keys here: https://dashboard.stripe.com/account/apikeys
+  stripe.api_key = "sk_test_4eC39HqLyjWDarjtT1zdp7dc"
+  # Token is created using Checkout or Elements!
+  # Get the payment token ID submitted by the form:
+  token = request.form['stripeToken'] # Using Flask
+  charge = stripe.Charge.create(
+      amount='request.session.cart',
+      currency='usd',
+      description='Example charge',
+      source=token,
+      metadata={'order_id': 6735},
+  )
+  return render(request, 'bandsite_app/merch.html', merch_count=merch_count)
 
 def admin(request):
   return render(request, 'bandsite_app/admin.html')
